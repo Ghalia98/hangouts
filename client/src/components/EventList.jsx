@@ -13,6 +13,7 @@ function EventList() {
                 setEvents(res.data)
                 // setEvents[res]
             })
+            .catch(err => console.log(err))
     }, [])
     return (
         <>
