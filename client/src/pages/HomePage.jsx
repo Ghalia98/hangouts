@@ -1,8 +1,16 @@
-import React from 'react'
+import { React } from 'react';
+import EventList from '../components/EventList';
 
 function HomePage() {
+
+
     return (
-        <div>This is the Home Page</div>
+        <>This is the Home Page
+
+            <EventList />
+
+
+        </>
     )
 }
 
