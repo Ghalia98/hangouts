@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import EventDeleteBtn from '../components/EventDeleteBtn';
+import EventEdit from './EventEdit';
 
 function EventDetails() {
     const { id } = useParams()
@@ -21,13 +21,16 @@ function EventDetails() {
         <>
             {event === null ? 'Loading' : <>
                 <h3><strong>Title:</strong> {event.title}</h3>
-                <p><strong> Location:</strong> {event.location}</p>
                 <p><strong>Date:</strong> {event.date} </p>
+                <p><strong> Location:</strong> {event.location}</p>
                 <p><strong>Description:</strong> {event.description}</p>
-                <ul><strong>GuestList:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
+                <ul><strong>Invitation List:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
                 )}</ul>
             </>
             }
+            <Link to={`/events/${id}/edit`}>
+                <button>Edit</button>
+            </Link>
             <EventDeleteBtn eventId={id} />
         </>
 
