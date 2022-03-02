@@ -1,13 +1,16 @@
 const router = require("express").Router();
 const Event = require("../models/Event")
 
-
-
+// Get all events
 router.get("/", (req, res, next) => {
-  res.json("All good in here");
+  Event.find()
+    .then(events => {
+      res.status(200).json(events)
+    })
+    .catch(err => next(err))
 });
 
-// You put the next routes here 👇
+
 // Create new event
 router.post("/", (req, res, next) => {
   const { title, date, location, description, guestList } = req.body;
@@ -18,6 +21,7 @@ router.post("/", (req, res, next) => {
     .catch(err => next(err))
 })
 
+// Edit 
 // example: router.use("/auth", authRoutes)
 
 module.exports = router;
