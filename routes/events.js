@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
 // create new event
 router.post("/", (req, res, next) => {
   const { title, date, location, description, guestList } = req.body;
-  Event.create({ title, date, location, description, guestList: guestList.split(' ') })
+  Event.create({ title, date, location, description, guestList: guestList.split(',') })
     .then(createdEvent => {
       res.status(201).json(createdEvent)
     })
@@ -41,7 +41,7 @@ router.put("/:id", (req, res, next) => {
       date,
       location,
       description,
-      guestList: guestList.split(' ')
+      guestList: guestList.split(',')
     }, { new: true })
     .then(updatedEvent => {
       res.status(200).json(updatedEvent)
