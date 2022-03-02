@@ -21,6 +21,15 @@ router.post("/", (req, res, next) => {
     .catch(err => next(err))
 })
 
+// get a specific event
+router.get("/:id", (req, res, next) => {
+  const { id } = req.params
+  Event.findById(id)
+    .then(event => {
+      res.status(200).json(event)
+    })
+    .catch(err => next(err))
+});
 // Edit 
 // example: router.use("/auth", authRoutes)
 
