@@ -2,7 +2,6 @@ import { React, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import EventDeleteBtn from '../components/EventDeleteBtn';
-import EventEdit from './EventEdit';
 
 function EventDetails() {
     const { id } = useParams()
@@ -24,7 +23,7 @@ function EventDetails() {
                 <p><strong>Date:</strong> {event.date} </p>
                 <p><strong> Location:</strong> {event.location}</p>
                 <p><strong>Description:</strong> {event.description}</p>
-                <ul><strong>Invitation List:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
+                <ul><strong>GuestList:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
                 )}</ul>
             </>
             }
