@@ -10,7 +10,7 @@ const eventSchema = new Schema({
         type: String,
         required: true,
     },
-    locaion: {
+    location: {
         type: String,
         required: true,
     },
@@ -24,12 +24,12 @@ const eventSchema = new Schema({
         required: true,
     },
     creator: {
-        type: Scheme.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
     }
 });
 
 //Export the model
-const Event = model("Event", userSchema);
+const Event = model("Event", eventSchema);
 
 module.exports = Event;
