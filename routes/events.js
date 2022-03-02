@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Event = require("../models/Event")
 
-// Get all events
+// get all events
 router.get("/", (req, res, next) => {
   Event.find()
     .then(events => {
@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
 });
 
 
-// Create new event
+// create new event
 router.post("/", (req, res, next) => {
   const { title, date, location, description, guestList } = req.body;
   Event.create({ title, date, location, description, guestList: guestList.split(' ') })
@@ -49,8 +49,15 @@ router.put("/:id", (req, res, next) => {
     .catch(err => next(err))
 })
 
+//  delete a specific event
+router.delete("/:id", (req, res, next) => {
+  const { id } = req.params
+  Event.findByIdAndDelete(id)
+    .then(() => {
+      res.status(200).json({ message: "event deleted" })
+    })
+    .catch(err => next(err))
+})
 
-
-// example: router.use("/auth", authRoutes)
 
 module.exports = router;
