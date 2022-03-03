@@ -8,7 +8,8 @@ function EventList() {
 
     // get all events
     const getEvents = () => {
-        axios.get('/api/events')
+        const storedToken = localStorage.getItem('authToken')
+        axios.get('/api/events', { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => {
                 console.log(res.data)
                 setEvents(res.data)

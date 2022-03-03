@@ -7,7 +7,8 @@ function EventDetails() {
     const { id } = useParams()
     const [event, setEvent] = useState(null)
     const getEvent = () => {
-        axios.get(`/api/events/${id}`)
+        const storedToken = localStorage.getItem('authToken')
+        axios.get(`/api/events/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => setEvent(res.data))
             .catch(err => console.log(err))
     }

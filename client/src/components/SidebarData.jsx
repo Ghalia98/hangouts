@@ -31,6 +31,12 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
+        title: 'Sign up',
+        path: '/signup',
+        icon: <HiIcons.HiLogin />,
+        cName: 'nav-text'
+    },
+    {
         title: 'Log out',
         path: '/logout',
         icon: <FiIcons.FiLogOut />,
