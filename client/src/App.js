@@ -3,12 +3,14 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import EventDetails from './pages/EventDetails';
 import EventEdit from './pages/EventEdit';
+import Navbar from './components/Navbar';
 
 function App() {
 
   return (
 
-    <div className="App">
+    <div className="App background-tint">
+      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

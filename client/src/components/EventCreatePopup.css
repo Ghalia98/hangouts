@@ -15,7 +15,7 @@
     padding: 32px;
     width: 100%;
     max-width: 640px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.787);
     border-radius: 1rem;
     border: 1.2px solid #6673fa;
 }

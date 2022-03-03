@@ -46,3 +46,11 @@ main {
   justify-content: center;
   min-height: 100vh;
 }
+
+.background-tint {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url('../public/bg-trial.jpg');
+  background-position: center;
+  background-size: cover;
+}
