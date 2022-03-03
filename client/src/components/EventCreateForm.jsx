@@ -10,11 +10,12 @@ function EventCreateForm() {
     const [time, setTime] = useState('')
     const [location, setLocation] = useState('')
     const [invitationList, setInvitationList] = useState('')
+    const [privateSetting, setPrivateSetting] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = e => {
         e.preventDefault();
-        const reqBody = { title, description, location, date, time, guestList: invitationList.toString() }
+        const reqBody = { title, description, location, date, time, guestList: invitationList.toString(), privateSetting }
         axios.post('/api/events', reqBody)
             .then(res => navigate(`/events/${res.data._id}`))
             .catch(err => console.log(err))
@@ -47,6 +48,10 @@ function EventCreateForm() {
                 <div>
                     <label htmlFor="description">Description: </label>
                     <textarea name="" id="description" cols="30" rows="10" onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
+                </div>
+                <div>
+                    <label htmlFor="privateSetting">Private: </label>
+                    <input type="checkbox" id='privateSetting' onChange={(e) => setPrivateSetting(e.target.checked)} value={privateSetting} />
                 </div>
                 <button type='submit' >Create</button>
             </form>

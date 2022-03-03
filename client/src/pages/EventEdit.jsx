@@ -11,6 +11,7 @@ function EventEdit() {
     const [time, setTime] = useState('')
     const [location, setLocation] = useState('')
     const [invitationList, setInvitationList] = useState('')
+    const [privateSetting, setPrivateSetting] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -21,13 +22,14 @@ function EventEdit() {
 
         axios.get(`/api/events/${id}`)
             .then(res => {
-                const { title, description, date, time, location, guestList } = res.data;
+                const { title, description, date, time, location, guestList, privateSetting } = res.data;
                 setTitle(title);
                 setDescription(description);
                 setDate(date);
                 setTime(time);
                 setLocation(location);
                 setInvitationList(guestList);
+                setPrivateSetting(privateSetting);
                 console.log(guestList)
 
             })
@@ -37,7 +39,7 @@ function EventEdit() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const reqBody = { title, description, location, date, time, guestList: invitationList.toString() }
+        const reqBody = { title, description, location, date, time, guestList: invitationList.toString(), privateSetting }
         console.log(reqBody)
         axios.put(`/api/events/${id}`, reqBody)
             .then(() => {
@@ -72,6 +74,10 @@ function EventEdit() {
                 <div>
                     <label htmlFor="description">Description: </label>
                     <textarea name="" id="description" cols="30" rows="10" onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
+                </div>
+                <div>
+                    <label htmlFor="privateSetting">Private: </label>
+                    <input type="checkbox" id='privateSetting' onChange={(e) => setPrivateSetting(e.target.checked)} checked={privateSetting} />
                 </div>
                 <button type='submit' >Save</button>
             </form>
