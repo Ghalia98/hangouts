@@ -19,8 +19,8 @@ function EventEdit() {
 
 
     useEffect(() => {
-
-        axios.get(`/api/events/${id}`)
+        const storedToken = localStorage.getItem('authToken')
+        axios.get(`/api/events/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => {
                 const { title, description, date, time, location, guestList, privateSetting } = res.data;
                 setTitle(title);

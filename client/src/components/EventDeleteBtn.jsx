@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 
 function EventDeleteBtn({ eventId }) {
     const navigate = useNavigate()
-
     const deleteEventHandler = () => {
-        axios.delete(`/api/events/${eventId}`)
+        const storedToken = localStorage.getItem('authToken')
+        axios.delete(`/api/events/${eventId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
                 // redirect to homepage
                 navigate('/')
@@ -15,7 +15,9 @@ function EventDeleteBtn({ eventId }) {
 
     return (
         <>
+
             <button type='button' onClick={deleteEventHandler}>Delete</button>
+
         </>
     )
 }

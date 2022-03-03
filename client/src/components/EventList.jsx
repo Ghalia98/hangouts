@@ -22,10 +22,10 @@ function EventList(props) {
     }, [])
     return (
         <>
-            <div class="grid-container">
+            <div className="grid-container">
                 {events.filter(event => {
                     return event.title.toLowerCase().includes(props.search.toLowerCase())
-                }).map(event => <div class="grid-item"> <EventCard key={event._id} {...event} /> </div>)}
+                }).map(event => <div className="grid-item" key={event._id}> <EventCard key={event._id} {...event} /> </div>)}
             </div>
         </>
     )
