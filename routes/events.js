@@ -13,8 +13,8 @@ router.get("/", (req, res, next) => {
 
 // create new event
 router.post("/", (req, res, next) => {
-  const { title, date, time, location, description, guestList } = req.body;
-  Event.create({ title, date, time, location, description, guestList: guestList.split(',') })
+  const { title, date, time, location, description, guestList, privateSetting } = req.body;
+  Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting })
     .then(createdEvent => {
       res.status(201).json(createdEvent)
     })
@@ -34,7 +34,7 @@ router.get("/:id", (req, res, next) => {
 // update a specific event
 router.put("/:id", (req, res, next) => {
   const { id } = req.params
-  const { title, date, time, location, description, guestList } = req.body
+  const { title, date, time, location, description, guestList, privateSetting } = req.body
   Event.findByIdAndUpdate(id,
     {
       title,
@@ -42,7 +42,8 @@ router.put("/:id", (req, res, next) => {
       time,
       location,
       description,
-      guestList: guestList.split(',')
+      guestList: guestList.split(','),
+      privateSetting
     }, { new: true })
     .then(updatedEvent => {
       res.status(200).json(updatedEvent)

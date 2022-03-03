@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import EventList from '../components/EventList';
 import EventCreatePopup from '../components/EventCreatePopup';
 import EventCreateForm from '../components/EventCreateForm';
+import SearchBar from '../components/SearchBar';
 
 function Home() {
 
@@ -10,6 +11,7 @@ function Home() {
     return (
         <>
             Home Page
+            <SearchBar />
             <EventList />
             <button onClick={() => setPopup(true)}>Create a Hangout</button>
             <EventCreatePopup trigger={popup} setTrigger={setPopup}>

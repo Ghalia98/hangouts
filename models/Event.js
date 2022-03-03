@@ -27,6 +27,10 @@ const eventSchema = new Schema({
         type: [String],
         required: true,
     },
+    privateSetting: {
+        type: Boolean,
+        required: true
+    },
     creator: {
         type: Schema.Types.ObjectId,
         ref: "User",

@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import EventCard from './EventCard';
+import './eventList.css'
 
 function EventList() {
     const [events, setEvents] = useState([])
@@ -20,7 +21,9 @@ function EventList() {
     }, [])
     return (
         <>
-            {events.map(event => <EventCard key={event._id} {...event} />)}
+            <div class="grid-container">
+                {events.map(event => <div class="grid-item"> <EventCard key={event._id} {...event} /> </div>)}
+            </div>
         </>
     )
 }
