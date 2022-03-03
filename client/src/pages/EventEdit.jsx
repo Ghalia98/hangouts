@@ -8,6 +8,7 @@ function EventEdit() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [date, setDate] = useState('')
+    const [time, setTime] = useState('')
     const [location, setLocation] = useState('')
     const [invitationList, setInvitationList] = useState('')
     const { id } = useParams()
@@ -20,10 +21,11 @@ function EventEdit() {
 
         axios.get(`/api/events/${id}`)
             .then(res => {
-                const { title, description, date, location, guestList } = res.data;
+                const { title, description, date, time, location, guestList } = res.data;
                 setTitle(title);
                 setDescription(description);
                 setDate(date);
+                setTime(time);
                 setLocation(location);
                 setInvitationList(guestList);
                 console.log(guestList)
@@ -35,7 +37,7 @@ function EventEdit() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const reqBody = { title, description, location, date, guestList: invitationList.toString() }
+        const reqBody = { title, description, location, date, time, guestList: invitationList.toString() }
         console.log(reqBody)
         axios.put(`/api/events/${id}`, reqBody)
             .then(() => {
@@ -53,7 +55,11 @@ function EventEdit() {
                 </div>
                 <div>
                     <label htmlFor="date">Date: </label>
-                    <input type="text" id="date" onChange={(e) => setDate(e.target.value)} value={date} />
+                    <input type="date" id="date" onChange={(e) => setDate(e.target.value)} value={date} />
+                </div>
+                <div>
+                    <label htmlFor="time">Time: </label>
+                    <input type="time" id="time" onChange={(e) => setTime(e.target.value)} value={time} />
                 </div>
                 <div>
                     <label htmlFor="location">Location: </label>

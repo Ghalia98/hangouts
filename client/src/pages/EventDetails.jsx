@@ -21,6 +21,7 @@ function EventDetails() {
             {event === null ? 'Loading' : <>
                 <h3><strong>Title:</strong> {event.title}</h3>
                 <p><strong>Date:</strong> {event.date} </p>
+                <p><strong>Time:</strong> {event.time} </p>
                 <p><strong> Location:</strong> {event.location}</p>
                 <p><strong>Description:</strong> {event.description}</p>
                 <ul><strong>GuestList:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
