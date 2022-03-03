@@ -6,7 +6,7 @@ function EventList() {
     const [events, setEvents] = useState([])
 
     // get all events
-    useEffect(() => {
+    const getEvents = () => {
         axios.get('/api/events')
             .then(res => {
                 console.log(res.data)
@@ -14,6 +14,9 @@ function EventList() {
                 // setEvents[res]
             })
             .catch(err => console.log(err))
+    }
+    useEffect(() => {
+        getEvents()
     }, [])
     return (
         <>
