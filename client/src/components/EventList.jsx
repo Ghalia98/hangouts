@@ -3,7 +3,7 @@ import axios from 'axios';
 import EventCard from './EventCard';
 import './eventList.css'
 
-function EventList() {
+function EventList(props) {
     const [events, setEvents] = useState([])
 
     // get all events
@@ -23,7 +23,9 @@ function EventList() {
     return (
         <>
             <div class="grid-container">
-                {events.map(event => <div class="grid-item"> <EventCard key={event._id} {...event} /> </div>)}
+                {events.filter(event => {
+                    return event.title.toLowerCase().includes(props.search.toLowerCase())
+                }).map(event => <div class="grid-item"> <EventCard key={event._id} {...event} /> </div>)}
             </div>
         </>
     )
