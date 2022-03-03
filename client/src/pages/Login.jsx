@@ -11,7 +11,7 @@ export default function Login() {
 
     const navigate = useNavigate()
 
-    const { storeToken } = useContext(AuthContext)
+    const { storeToken, verifyStoredToken } = useContext(AuthContext)
     const handleSubmit = e => {
 
         e.preventDefault()
@@ -24,6 +24,7 @@ export default function Login() {
                 const token = response.data.authToken
                 // store the token
                 storeToken(token)
+                verifyStoredToken()
                     .then(() => {
                         // redirect to projects
                         navigate('/')
