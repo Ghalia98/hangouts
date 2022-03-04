@@ -5,7 +5,11 @@ import EventCreateForm from '../components/EventCreateForm';
 import SearchBar from '../components/SearchBar';
 import { useContext } from "react";
 import { AuthContext } from "../context/auth";
-function Home() {
+import * as RiIcons from "react-icons/ri"
+import { IconContext } from 'react-icons'
+import './home.css'
+
+function Home(prop) {
 
     const [search, setSearch] = useState('')
     const [popup, setPopup] = useState(false)
@@ -24,6 +28,11 @@ function Home() {
                 <h2>Create a Hangout</h2>
                 <EventCreateForm />
             </EventCreatePopup>
+            <IconContext.Provider value={{ size: '40px' }}>
+                <span className="change-bg-icon">
+                    <RiIcons.RiImageEditLine onClick={prop.renderBgImg} />
+                </span>
+            </IconContext.Provider>
 
         </>
     )

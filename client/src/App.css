@@ -43,14 +43,19 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   min-height: 100vh;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.4));
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
 .background-tint {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.4)),
-    url('../public/bg-trial.jpg');
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+
 }

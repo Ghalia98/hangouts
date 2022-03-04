@@ -1,0 +1,10 @@
+span.change-bg-icon {
+    width: 100%;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 1%;
+    display: flex;
+    justify-content: flex-end;
+}
