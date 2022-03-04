@@ -31,7 +31,19 @@ const userSchema = new Schema(
     // gender: {
     //   type: String,
     //   required: true
-    // }
+    // },
+    followers: {
+      type: Array,
+      default: []
+    },
+    following: {
+      type: Array,
+      default: []
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,
