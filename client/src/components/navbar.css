@@ -17,8 +17,11 @@
 .menu-bars {
     margin-top: 1rem;
     margin-left: 1.5rem;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     background: none;
+    position: absolute;
+    left: 0;
+    top: 0
 }
 
 .nav-menu {
