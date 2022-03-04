@@ -70,25 +70,4 @@ router.put('/:id/unfollow', (req, res, next) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;

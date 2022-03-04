@@ -8,6 +8,7 @@ import EventEdit from './pages/EventEdit';
 import Navbar from './components/Navbar';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import { useEffect } from 'react';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/events/:id/edit" element={<EventEdit />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
     </div >

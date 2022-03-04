@@ -3,7 +3,7 @@ const Event = require("../models/Event")
 
 // get all events
 router.get("/", (req, res, next) => {
-  Event.find()
+  Event.find().populate('creator')
     .then(events => {
       res.status(200).json(events)
     })
@@ -13,8 +13,8 @@ router.get("/", (req, res, next) => {
 
 // create new event
 router.post("/", (req, res, next) => {
-  const { title, date, time, location, description, guestList, privateSetting } = req.body;
-  Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting })
+  const { title, date, time, location, description, guestList, privateSetting, creator } = req.body;
+  Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting, creator })
     .then(createdEvent => {
       res.status(201).json(createdEvent)
     })
@@ -24,7 +24,7 @@ router.post("/", (req, res, next) => {
 // get a specific event
 router.get("/:id", (req, res, next) => {
   const { id } = req.params
-  Event.findById(id)
+  Event.findById(id).populate('creator')
     .then(event => {
       res.status(200).json(event)
     })
