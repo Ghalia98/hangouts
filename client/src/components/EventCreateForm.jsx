@@ -15,7 +15,7 @@ function EventCreateForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const reqBody = { title, description, location, date, time, guestList: invitationList.toString(), privateSetting }
+        const reqBody = { title, description, location, date, time, guestList: invitationList.toString(), privateSetting, }
         const storedToken = localStorage.getItem('authToken')
         axios.post('/api/events', reqBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => navigate(`/events/${res.data._id}`))

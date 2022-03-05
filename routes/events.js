@@ -14,23 +14,28 @@ router.get("/", (req, res, next) => {
 // create new event
 router.post("/", (req, res, next) => {
   const { title, date, time, location, description, guestList, privateSetting, creator } = req.body;
-  Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting, creator })
-    .then(createdEvent => {
-      res.status(201).json(createdEvent)
-    })
-    .catch(err => next(err))
+  if (req.payload) {
+    Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting, creator: req.payload._id })
+      .then(createdEvent => {
+        console.log(createdEvent);
+        res.status(201).json(createdEvent)
+      })
+      .catch(err => next(err))
+  }
 })
+
 
 // get a specific event
 router.get("/:id", (req, res, next) => {
   const { id } = req.params
+  console.log("req", req.payload._id);
   Event.findById(id).populate('creator')
     .then(event => {
+
       res.status(200).json(event)
     })
     .catch(err => next(err))
 });
-
 // update a specific event
 router.put("/:id", (req, res, next) => {
   const { id } = req.params

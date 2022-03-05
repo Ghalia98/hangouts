@@ -1,17 +1,17 @@
-import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './event-card.css'
 
-function EventCard({ title, _id }) {
-    // const storedToken = localStorage.getItem('authToken')
-    // axios.get(`/api/users/${creator}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-    // .then(user => console.log(user))
+function EventCard({ title, _id, creator }) {
     // console.log(creator)
+
     return (
         <>
             <Link to={`/events/${_id}`}>
                 <h1>{title}</h1>
-                <h2>created by: </h2>
+            </Link>
+            <Link to={`/${creator && creator._id}/Profile`}>
+                <h3>Created by:<span className="creator">{creator && creator.name}</span></h3>
             </Link>
         </>
     )

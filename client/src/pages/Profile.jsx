@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import FollowBtn from '../components/FollowBtn';
 import { AuthContext } from "../context/auth";
-
 
 function Profile() {
     const { user: currentUser } = useContext(AuthContext)
@@ -10,8 +8,8 @@ function Profile() {
             Profile
             <div>
                 {/* <img src="" alt="" /> */}
+
                 <h1>{currentUser.name}</h1>
-                <FollowBtn />
             </div>
             <div className='my-events-container'>
 

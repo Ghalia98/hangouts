@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import VisitedProfile from './pages/VisitedProfile';
 import { useEffect } from 'react';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/:id/profile" element={<VisitedProfile />} />
         </Routes>
       </main>
     </div >
