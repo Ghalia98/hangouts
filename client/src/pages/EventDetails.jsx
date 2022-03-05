@@ -1,12 +1,16 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { AuthContext } from "../context/auth";
 import axios from 'axios';
 import EventDeleteBtn from '../components/EventDeleteBtn';
 import GoingBtn from '../components/GoingBtn';
+import GoingList from '../components/GoingList';
 
 function EventDetails() {
     const { id } = useParams()
     const [event, setEvent] = useState(null)
+    const { user: currentUser } = useContext(AuthContext)
+
     const getEvent = () => {
         const storedToken = localStorage.getItem('authToken')
         axios.get(`/api/events/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -14,29 +18,50 @@ function EventDetails() {
             .catch(err => console.log(err))
     }
 
+    // useEffect(() => {
+
+
+    // }, [])
+
+
+    const handleGoingList = () => {
+        console.log(event._id)
+        const storedToken = localStorage.getItem('authToken')
+        axios.put(`/api/events/${event._id}/update/going-list`, { currentUserName: currentUser.name }, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
+
+        getEvent()
+    }
     useEffect(() => {
         getEvent();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+    console.log(event)
     return (
         <>
-            {event === null ? 'Loading' : <>
-                <h3><strong>Title:</strong> {event.title}</h3>
-                <p><strong>Date:</strong> {event.date} </p>
-                <p><strong>Time:</strong> {event.time} </p>
-                <p><strong> Location:</strong> {event.location}</p>
-                <p><strong>Description:</strong> {event.description}</p>
-                <ul><strong>GuestList:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
-                )}</ul>
-            </>
-            }
-            <Link to={`/events/${id}/edit`}>
-                <button>Edit</button>
-            </Link>
-            <EventDeleteBtn eventId={id} />
+            <div className='event-details'>
+                {event === null ? 'Loading' : <>
+                    <h3><strong>Title:</strong> {event.title}</h3>
+                    <p><strong>Date:</strong> {event.date} </p>
+                    <p><strong>Time:</strong> {event.time} </p>
+                    <p><strong> Location:</strong> {event.location}</p>
+                    <p><strong>Description:</strong> {event.description}</p>
+                    <ul><strong>GuestList:</strong> {event.guestList.map((guest, index) => <li key={index}> {guest} </li>
+                    )}</ul>
+                </>
+                }
+                <Link to={`/events/${id}/edit`}>
+                    <button>Edit</button>
+                </Link>
+                <EventDeleteBtn eventId={id} />
 
-            <GoingBtn event={event} setEvent={setEvent} eventId={id} />
+                <GoingBtn handleGoingList={handleGoingList} />
+            </div>
+            <div className='going-list'>
+                <GoingList handleGoingList={handleGoingList} event={event} />
+            </div>
         </>
 
     )

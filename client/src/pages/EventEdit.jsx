@@ -15,6 +15,7 @@ function EventEdit() {
     const { id } = useParams()
     const navigate = useNavigate()
 
+
     //  add time state to edit event page when you add it to the model
 
 
@@ -41,7 +42,8 @@ function EventEdit() {
         e.preventDefault();
         const reqBody = { title, description, location, date, time, guestList: invitationList.toString(), privateSetting }
         console.log(reqBody)
-        axios.put(`/api/events/${id}`, reqBody)
+        const storedToken = localStorage.getItem('authToken')
+        axios.put(`/api/events/${id}`, reqBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
                 navigate(`/events/${id}`)
             })
