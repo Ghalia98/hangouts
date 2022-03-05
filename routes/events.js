@@ -3,7 +3,7 @@ const Event = require("../models/Event")
 
 // get all events
 router.get("/", (req, res, next) => {
-  Event.find()
+  Event.find().populate('creator')
     .then(events => {
       res.status(200).json(events)
     })
@@ -13,24 +13,29 @@ router.get("/", (req, res, next) => {
 
 // create new event
 router.post("/", (req, res, next) => {
-  const { title, date, time, location, description, guestList, privateSetting } = req.body;
-  Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting })
-    .then(createdEvent => {
-      res.status(201).json(createdEvent)
-    })
-    .catch(err => next(err))
+  const { title, date, time, location, description, guestList, privateSetting, creator } = req.body;
+  if (req.payload) {
+    Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting, creator: req.payload._id })
+      .then(createdEvent => {
+        console.log(createdEvent);
+        res.status(201).json(createdEvent)
+      })
+      .catch(err => next(err))
+  }
 })
+
 
 // get a specific event
 router.get("/:id", (req, res, next) => {
   const { id } = req.params
-  Event.findById(id)
+  console.log("req", req.payload._id);
+  Event.findById(id).populate('creator')
     .then(event => {
+
       res.status(200).json(event)
     })
     .catch(err => next(err))
 });
-
 // update a specific event
 router.put("/:id", (req, res, next) => {
   const { id } = req.params

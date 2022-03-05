@@ -8,3 +8,9 @@ span.change-bg-icon {
     display: flex;
     justify-content: flex-end;
 }
+
+span.change-bg-icon:hover {
+    margin-bottom: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}

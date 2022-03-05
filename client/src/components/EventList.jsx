@@ -8,12 +8,12 @@ function EventList(props) {
 
     // get all events
     const getEvents = () => {
+
         const storedToken = localStorage.getItem('authToken')
         axios.get('/api/events', { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setEvents(res.data)
-                // setEvents[res]
             })
             .catch(err => console.log(err))
     }
