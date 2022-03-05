@@ -15,6 +15,8 @@ router.get('/:id', (req, res, next) => {
         )
         .catch(err => next(err))
 })
+
+// follow a user
 router.put("/:id/follow", async (req, res) => {
     if (req.body.userId !== req.params.id) {
         try {

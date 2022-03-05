@@ -15,7 +15,7 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const { title, date, time, location, description, guestList, privateSetting, creator } = req.body;
   if (req.payload) {
-    Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting, creator: req.payload._id })
+    Event.create({ title, date, time, location, description, guestList: guestList.split(','), privateSetting, creator: req.payload._id, goingList })
       .then(createdEvent => {
         console.log(createdEvent);
         res.status(201).json(createdEvent)
@@ -66,5 +66,23 @@ router.delete("/:id", (req, res, next) => {
     .catch(err => next(err))
 })
 
+// update a guest-list
+router.put("/:id/update/going-list", (req, res, next) => {
+  const { id } = req.params
+  Event.findById(id)
+    .then(event => {
+      console.log(res)
+      if (!event.goingList.includes(req.body.currentUserName)) {
+        Event.updateOne({ $push: { goingList: req.body.currentUserName } })
+          .then(() => {
+            res.status(200).json("user has been added event's going-list")
+          })
+          .catch(err => next(err))
+      } else {
+        res.status(403).json('User is already in going-list')
+      }
+    })
+    .catch(err => next(err))
+})
 
 module.exports = router;

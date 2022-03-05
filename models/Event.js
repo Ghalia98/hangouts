@@ -27,6 +27,10 @@ const eventSchema = new Schema({
         type: [String],
         required: true,
     },
+    goingList: {
+        type: [String],
+        default: []
+    },
     privateSetting: {
         type: Boolean,
         required: true

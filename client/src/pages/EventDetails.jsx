@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import EventDeleteBtn from '../components/EventDeleteBtn';
+import GoingBtn from '../components/GoingBtn';
 
 function EventDetails() {
     const { id } = useParams()
@@ -15,6 +16,7 @@ function EventDetails() {
 
     useEffect(() => {
         getEvent();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -33,6 +35,8 @@ function EventDetails() {
                 <button>Edit</button>
             </Link>
             <EventDeleteBtn eventId={id} />
+
+            <GoingBtn event={event} setEvent={setEvent} eventId={id} />
         </>
 
     )
