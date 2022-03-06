@@ -42,18 +42,24 @@ function VisitedProfile() {
     const { user: currentUser } = useContext(AuthContext)
 
     const [follow, setFollow] = useState(user.followers?.includes(currentUser?._id))
+    console.log('inital follow', follow)
     console.log(user)
+
+    useEffect(() => {
+        setFollow(user.followers?.includes(currentUser?._id))
+    }, [currentUser, user])
+
 
     const followHandler = () => {
         if (follow) {
             console.log(user.followers.length)
-            axios.put(`/api/users/${id}/unfollow`, { userId: currentUser._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
+            axios.put(`/api/users/${id}/unfollow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers - 1)
                 })
                 .catch(err => console.log(err))
         } else {
-            axios.put(`/api/users/${id}/follow`, { userId: currentUser._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
+            axios.put(`/api/users/${id}/follow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers + 1)
                 }
@@ -62,16 +68,23 @@ function VisitedProfile() {
         }
         setFollow(!follow)
     }
+    return (
+        <DisconnectedProfile user={user} currentUserId={currentUser?._id} onFollowChange={followHandler} follow={follow} />
+    )
+}
 
+
+
+export function DisconnectedProfile({ user, currentUserId, onFollowChange, follow }) {
     return (
         <div style={{ color: "white" }}>
             Visited Profile
             <div>
                 {/* <img src="" alt="" /> */}
-                <h1>{user.name}</h1>
-                <p>{followers} followers</p>
-                {currentUser._id !== id &&
-                    <button onClick={followHandler}>
+                <h1>{user?.name}</h1>
+                <p>{user?.followers?.length} followers</p>
+                {user?._id !== currentUserId &&
+                    <button onClick={onFollowChange}>
                         {follow ? 'following' : 'follow'}
                     </button>
                 }
