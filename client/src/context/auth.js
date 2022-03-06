@@ -51,6 +51,9 @@ function AuthProviderWrapper(props) {
         verifyStoredToken()
     }, [])
 
+    if (isLoggedIn && !user) {
+        return <div></div>
+    }
     return (
         <AuthContext.Provider value={{ isLoggedIn, user, isLoading, storeToken, verifyStoredToken, logoutUser }}>
             {props.children}

@@ -79,10 +79,12 @@ router.post('/login', (req, res, next) => {
         })
 });
 
-router.get('/verify', isAuthenticated, (req, res, next) => {
+router.get('/verify', isAuthenticated, async (req, res, next) => {
     // if the token is valid we can access it on : req.payload
+    const user = await User.findById(req.payload._id)
+    console.log(user)
     console.log('request payload is: ', req.payload)
-    res.status(200).json(req.payload)
+    res.status(200).json(user)
 });
 
 module.exports = router;
