@@ -84,7 +84,10 @@ router.get('/verify', isAuthenticated, async (req, res, next) => {
     const user = await User.findById(req.payload._id)
     console.log(user)
     console.log('request payload is: ', req.payload)
-    res.status(200).json(user)
+    {
+        user &&
+            res.status(200).json(user)
+    }
 });
 
 module.exports = router;

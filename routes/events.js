@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Event = require("../models/Event")
+const User = require("../models/User")
 
 // get all events
 router.get("/", (req, res, next) => {
@@ -60,8 +61,13 @@ router.put("/:id", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
   const { id } = req.params
   Event.findByIdAndDelete(id)
-    .then(() => {
+    .then(delEvent => {
       res.status(200).json({ message: "event deleted" })
+      return delEvent
+    }).then(delEvent => {
+      User.updateMany({ $in: { favList: delEvent._id } }, { $pull: { favList: delEvent._id } })
+        .then(res => res.status(200).json('event has been deleted'))
+        .catch(err => next(err))
     })
     .catch(err => next(err))
 })
@@ -84,5 +90,7 @@ router.put("/:id/update/going-list", (req, res, next) => {
     })
     .catch(err => next(err))
 })
+
+
 
 module.exports = router;

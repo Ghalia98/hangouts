@@ -1,0 +1,16 @@
+.interested-in-container {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+}
+
+.interested-in-container>div {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+}
+
+.interested-in-container>div>div {
+
+    border: 1px solid orange;
+}

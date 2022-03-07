@@ -9,3 +9,9 @@
     cursor: pointer;
 
 }
+
+.grid-item .fav-icon svg:hover {
+    transform: scale(1.3);
+    transition: 0.09s linear;
+    cursor: pointer;
+}
