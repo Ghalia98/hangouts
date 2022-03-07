@@ -2,7 +2,7 @@ import axios from 'axios'
 import { React } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function EventDeleteBtn({ eventId }) {
+function EventDeleteBtn({ eventId, eventCreator }) {
     const navigate = useNavigate()
     const deleteEventHandler = () => {
         const storedToken = localStorage.getItem('authToken')

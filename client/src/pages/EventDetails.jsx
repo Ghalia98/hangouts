@@ -52,10 +52,16 @@ function EventDetails() {
                     )}</ul>
                 </>
                 }
-                <Link to={`/events/${id}/edit`}>
-                    <button>Edit</button>
-                </Link>
-                <EventDeleteBtn eventId={id} />
+
+
+                {event?.creator._id === currentUser?._id &&
+                    <>
+                        <Link to={`/events/${id}/edit`}>
+                            <button>Edit</button>
+                        </Link>
+                        < EventDeleteBtn eventId={id} />
+                    </>
+                }
 
                 <GoingBtn handleGoingList={handleGoingList} />
             </div>
