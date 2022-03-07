@@ -52,7 +52,7 @@ function AuthProviderWrapper(props) {
     }, [])
 
     if (isLoggedIn && !user) {
-        return <div></div>
+        return '<div></div>'
     }
     return (
         <AuthContext.Provider value={{ isLoggedIn, user, isLoading, storeToken, verifyStoredToken, logoutUser }}>

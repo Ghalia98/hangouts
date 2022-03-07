@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { rawListeners } = require("../models/User");
 const User = require('../models/User')
 
 
@@ -6,7 +7,7 @@ const User = require('../models/User')
 
 router.get('/:id', (req, res, next) => {
     const { id } = req.params
-    User.findById(id, { following: 1, followers: 1, _id: 1, name: 1 })
+    User.findById(id, { following: 1, followers: 1, _id: 1, name: 1, favList: 1 })
         .then(user => {
             res.status(200).json(user)
         }
@@ -57,4 +58,43 @@ router.put("/:id/unfollow", async (req, res) => {
     }
 });
 
+// add event to fav-list
+router.put("/:id/update/fav-list", (req, res, next) => {
+    const eventId = req.params.id
+    const userId = req.body.userId
+    User.findById(userId)
+        .then(user => {
+            console.log(res)
+            if (!user.favList.includes(eventId)) {
+                user.updateOne({ $push: { favList: eventId } })
+                    .then(() => {
+                        res.status(200).json("event has been added to user's fav-list")
+                    })
+                    .catch(err => next(err))
+            } else {
+                res.status(403).json("event is already in user's fav-list")
+            }
+        })
+        .catch(err => next(err))
+})
+
+// remove event from a user's fav list 
+router.delete("/:id/update/fav-list", (req, res, next) => {
+    const eventId = req.params.id
+    const userId = req.body.userId
+    User.findById(userId)
+        .then(user => {
+            console.log(res)
+            if (user.favList.includes(eventId)) {
+                user.updateOne({ $pull: { favList: eventId } })
+                    .then(() => {
+                        res.status(200).json("event has been removed from user's fav-list")
+                    })
+                    .catch(err => next(err))
+            } else {
+                res.status(403).json("event is already removed from user's fav-list")
+            }
+        })
+        .catch(err => next(err))
+})
 module.exports = router;

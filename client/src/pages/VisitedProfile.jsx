@@ -1,11 +1,14 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from "../context/auth";
+import FavList from '../components/FavList';
+import './visited-profile.css';
+
 
 
 function VisitedProfile() {
+    const { user: currentUser } = useContext(AuthContext)
     const { id } = useParams()
     const [user, setUser] = useState({})
     const [followers, setFollowers] = useState('Loading')
@@ -39,11 +42,10 @@ function VisitedProfile() {
 
     // console.log(user)
 
-    const { user: currentUser } = useContext(AuthContext)
 
     const [follow, setFollow] = useState(user.followers?.includes(currentUser?._id))
-    console.log('inital follow', follow)
-    console.log(user)
+    // console.log('inital follow', follow)
+    // console.log(user)
 
     useEffect(() => {
         setFollow(user.followers?.includes(currentUser?._id))
@@ -52,7 +54,7 @@ function VisitedProfile() {
 
     const followHandler = () => {
         if (follow) {
-            console.log(user.followers.length)
+            // console.log(user.followers.length)
             axios.put(`/api/users/${id}/unfollow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers - 1)
@@ -69,13 +71,18 @@ function VisitedProfile() {
         setFollow(!follow)
     }
     return (
-        <DisconnectedProfile user={user} currentUserId={currentUser?._id} onFollowChange={followHandler} follow={follow} />
+        <>
+            <DisconnectedProfile user={user} currentUserId={currentUser?._id} onFollowChange={followHandler} follow={follow} />
+        </>
+
     )
 }
 
 
 
 export function DisconnectedProfile({ user, currentUserId, onFollowChange, follow }) {
+
+    // console.log(user?._id)
     return (
         <div style={{ color: "white" }}>
             Visited Profile
@@ -89,6 +96,10 @@ export function DisconnectedProfile({ user, currentUserId, onFollowChange, follo
                     </button>
                 }
             </div>
+            <div className='interested-in-container'>
+                {user?._id === currentUserId &&
+                    < FavList userId={currentUserId} />}
+            </div>
             <div className='my-events-container'>
 
             </div>
@@ -101,6 +112,7 @@ export function DisconnectedProfile({ user, currentUserId, onFollowChange, follo
             <div className='following-list-container'>
 
             </div>
+
         </div>
     )
 }
