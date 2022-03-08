@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../context/auth';
 import Conversation from './Conversation';
 import Message from './Message';
@@ -13,15 +13,35 @@ function Messenger() {
     const [messages, setMessages] = useState(null)
     const { user: currentUser } = useContext(AuthContext);
     const [newMessage, setNewMessage] = useState('')
-    const [socket, setSocket] = useState(null)
+    const [receivedMessage, setReceivedMessage] = useState(null)
+    const socket = useRef()
     const storedToken = localStorage.getItem('authToken')
 
     // console.log(currentUser)
+
     useEffect(() => {
-        setSocket(io("ws://localhost:5005"))
+        socket.current = io("ws://localhost:5005");
+        socket.current.on("getMessage", data => {
+            setReceivedMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now()
+            })
+        })
+
     }, [])
 
+    useEffect(() => {
+        receivedMessage && currentChat?.members.includes(receivedMessage.sender) &&
+            setMessages((old) => [...old, receivedMessage]);
+    }, [receivedMessage, currentChat])
 
+    useEffect(() => {
+        socket.current.emit("addUser", currentUser?._id);
+        socket.current.on("getUsers", users => {
+            console.log(users)
+        })
+    }, [currentUser])
 
     useEffect(() => {
         const fetchConvos = async () => {
@@ -34,7 +54,7 @@ function Messenger() {
             }
         }
         fetchConvos()
-    }, [currentUser._id])
+    }, [currentUser?._id])
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -53,22 +73,29 @@ function Messenger() {
     const handleSend = async (e) => {
         e.preventDefault();
         const message = {
-            sender: currentUser._id,
+            sender: currentUser?._id,
             text: newMessage,
             conversationId: currentChat._id
         }
 
+        const receiverId = currentChat.members.find(member => member !== currentUser._id)
+        socket.current.emit("sendMessage", {
+            senderId: currentUser?._id,
+            receiverId,
+            text: newMessage
+        })
+
         try {
-            const res = await axios.post('/api/messages', message, { headers: { Authorization: `Bearer ${storedToken}` } })
-            console.log(res)
-            setMessages([...messages, res.data])
-            setNewMessage('')
+            const res = await axios.post("/api/messages", message, { headers: { Authorization: `Bearer ${storedToken}` } });
+            setMessages([...messages, res.data]);
+            setNewMessage("");
         }
         catch (err) {
             console.log(err)
         }
-
     }
+
+
     return (
         <div className='row-container'>
             <div>
