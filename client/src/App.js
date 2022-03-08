@@ -15,7 +15,6 @@ import alanBtn from '@alan-ai/alan-sdk-web'
 import { useNavigate } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 const alanKey = '41effc0282974b90e440026551d25c8d2e956eca572e1d8b807a3e2338fdd0dc/stage'
-
 function App() {
   const navigate = useNavigate()
   useEffect(() => {

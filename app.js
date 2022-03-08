@@ -26,6 +26,12 @@ app.use("/api/auth", auth);
 const users = require("./routes/users");
 app.use("/api/users", isAuthenticated, users);
 
+const conversations = require("./routes/conversations");
+app.use("/api/conversations", isAuthenticated, conversations);
+
+const messages = require("./routes/messages");
+app.use("/api/messages", isAuthenticated, messages);
+
 const path = require('path');
 app.use(express.static(path.join(__dirname, "/client/build")));
 app.use((req, res) => {

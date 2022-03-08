@@ -4,6 +4,8 @@ import { AuthContext } from '../context/auth';
 import Conversation from './Conversation';
 import Message from './Message';
 import './Messenger.css';
+import { io } from 'socket.io-client';
+
 
 function Messenger() {
     const [conversations, setConversations] = useState([]);
@@ -11,9 +13,15 @@ function Messenger() {
     const [messages, setMessages] = useState(null)
     const { user: currentUser } = useContext(AuthContext);
     const [newMessage, setNewMessage] = useState('')
+    const [socket, setSocket] = useState(null)
     const storedToken = localStorage.getItem('authToken')
 
     // console.log(currentUser)
+    useEffect(() => {
+        setSocket(io("ws://localhost:5005"))
+    }, [])
+
+
 
     useEffect(() => {
         const fetchConvos = async () => {
