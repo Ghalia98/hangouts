@@ -58,12 +58,14 @@ function VisitedProfile() {
             axios.put(`/api/users/${id}/unfollow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers - 1)
+                    console.log(res)
                 })
                 .catch(err => console.log(err))
         } else {
             axios.put(`/api/users/${id}/follow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers + 1)
+                    console.log(res)
                 }
                 )
                 .catch(err => console.log(err))
@@ -88,7 +90,7 @@ export function DisconnectedProfile({ user, currentUserId, onFollowChange, follo
             Visited Profile
             <div>
                 {/* <img src="" alt="" /> */}
-                <h1>{user?.name}</h1>
+                <h1>{user.name}</h1>
                 <p>{user?.followers?.length} followers</p>
                 {user?._id !== currentUserId &&
                     <button onClick={onFollowChange}>

@@ -14,3 +14,9 @@ span.change-bg-icon:hover {
     transition: 0.3s;
     cursor: pointer;
 }
+
+#home-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

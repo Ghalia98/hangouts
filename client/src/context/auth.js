@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Spinner from 'react-bootstrap/Spinner'
 const AuthContext = React.createContext()
 
 function AuthProviderWrapper(props) {
@@ -51,8 +51,11 @@ function AuthProviderWrapper(props) {
         verifyStoredToken()
     }, [])
 
-    if (isLoggedIn && !user) {
-        return '<div></div>'
+    if (isLoading || (isLoggedIn && !user)) {
+        return <div></div>
+        //     <Spinner animation="border" role="status">
+        //     <span className="visually-hidden">Loading...</span>
+        // </Spinner >
     }
     return (
         <AuthContext.Provider value={{ isLoggedIn, user, isLoading, storeToken, verifyStoredToken, logoutUser }}>

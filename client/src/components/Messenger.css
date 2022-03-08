@@ -1,0 +1,13 @@
+.messenger-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-box {
+    width: 250px;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+}
