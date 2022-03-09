@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
+import './signup.css'
 
 export default function Signup() {
 
@@ -31,21 +32,31 @@ export default function Signup() {
 
     return (
         <>
-            <h1>Signup</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email: </label>
-                <input type="text" value={email} onChange={handleEmail} />
-                <label htmlFor="password">Password: </label>
-                <input type="password" value={password} onChange={handlePassword} />
-                <label htmlFor="name">Name: </label>
-                <input type="text" value={name} onChange={handleName} />
-                <button type="submit">Sign Up</button>
-            </form>
-
+            <div className="signup-form">
+                <form onSubmit={handleSubmit} >
+                    <h1>Signup</h1>
+                    <div>
+                        <label htmlFor="name">Full Name: </label>
+                        <input type="text" value={name} onChange={handleName} />
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email: </label>
+                        <input type="text" value={email} onChange={handleEmail} />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password: </label>
+                        <input type="password" value={password} onChange={handlePassword} />
+                    </div>
+                    <div className='signup-btn-container'>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                    <span>Already have an account? </span>
+                    <Link to='/login'>Login</Link>
+                </form>
+            </div>
             {errorMessage && <h5>{errorMessage}</h5>}
 
-            <h3>Already have an account?</h3>
-            <Link to='/login'>Login</Link>
+
         </>
     )
 }

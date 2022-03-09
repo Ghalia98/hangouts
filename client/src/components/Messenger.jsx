@@ -49,7 +49,7 @@ function Messenger() {
         if (currentUser) {
             const fetchConvos = async () => {
                 try {
-                    const res = await axios.get(`/api/conversations/${currentUser._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+                    const res = await axios.get(`/api/conversations/${currentUser?._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
                     setConversations(res.data)
                     // console.log(res)
                 } catch (err) {
@@ -83,7 +83,7 @@ function Messenger() {
                 conversationId: currentChat._id
             }
 
-            const receiverId = currentChat.members.find(member => member !== currentUser._id)
+            const receiverId = currentChat.members.find(member => member !== currentUser?._id)
             socket.current.emit("sendMessage", {
                 senderId: currentUser?._id,
                 receiverId,
