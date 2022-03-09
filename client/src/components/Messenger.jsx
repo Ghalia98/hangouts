@@ -20,7 +20,7 @@ function Messenger() {
     // console.log(currentUser)
 
     useEffect(() => {
-        socket.current = io("ws://hangout-events.herokuapp.com");
+        socket.current = io("https://hangout-events.herokuapp.com");
         socket.current.on("getMessage", data => {
             setReceivedMessage({
                 sender: data.senderId,
