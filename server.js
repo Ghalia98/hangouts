@@ -20,7 +20,7 @@ let users = []
 const addUsers = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId })
-  console.log(users)
+  console.log('userssssssssss', users)
 }
 
 

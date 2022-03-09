@@ -37,23 +37,27 @@ function Messenger() {
     }, [receivedMessage, currentChat])
 
     useEffect(() => {
-        socket.current.emit("addUser", currentUser?._id);
-        socket.current.on("getUsers", users => {
-            console.log(users)
-        })
+        if (currentUser) {
+            socket.current.emit("addUser", currentUser?._id);
+            socket.current.on("getUsers", users => {
+                console.log(users)
+            })
+        }
     }, [currentUser])
 
     useEffect(() => {
-        const fetchConvos = async () => {
-            try {
-                const res = await axios.get(`/api/conversations/${currentUser._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-                setConversations(res.data)
-                // console.log(res)
-            } catch (err) {
-                console.log(err)
+        if (currentUser) {
+            const fetchConvos = async () => {
+                try {
+                    const res = await axios.get(`/api/conversations/${currentUser._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+                    setConversations(res.data)
+                    // console.log(res)
+                } catch (err) {
+                    console.log(err)
+                }
             }
+            fetchConvos()
         }
-        fetchConvos()
     }, [currentUser?._id])
 
     useEffect(() => {
@@ -71,27 +75,29 @@ function Messenger() {
     // console.log(user)
 
     const handleSend = async (e) => {
-        e.preventDefault();
-        const message = {
-            sender: currentUser?._id,
-            text: newMessage,
-            conversationId: currentChat._id
-        }
+        if (currentUser) {
+            e.preventDefault();
+            const message = {
+                sender: currentUser?._id,
+                text: newMessage,
+                conversationId: currentChat._id
+            }
 
-        const receiverId = currentChat.members.find(member => member !== currentUser._id)
-        socket.current.emit("sendMessage", {
-            senderId: currentUser?._id,
-            receiverId,
-            text: newMessage
-        })
+            const receiverId = currentChat.members.find(member => member !== currentUser._id)
+            socket.current.emit("sendMessage", {
+                senderId: currentUser?._id,
+                receiverId,
+                text: newMessage
+            })
 
-        try {
-            const res = await axios.post("/api/messages", message, { headers: { Authorization: `Bearer ${storedToken}` } });
-            setMessages([...messages, res.data]);
-            setNewMessage("");
-        }
-        catch (err) {
-            console.log(err)
+            try {
+                const res = await axios.post("/api/messages", message, { headers: { Authorization: `Bearer ${storedToken}` } });
+                setMessages([...messages, res.data]);
+                setNewMessage("");
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
     }
 
