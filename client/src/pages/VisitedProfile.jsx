@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from "../context/auth";
 import FavList from '../components/FavList';
 import './visited-profile.css';
+import './disconnected-profile.css'
 
 
 
@@ -81,24 +82,34 @@ function VisitedProfile() {
 }
 
 
-
 export function DisconnectedProfile({ user, currentUserId, onFollowChange, follow }) {
 
     // console.log(user?._id)
     return (
-        <div style={{ color: "white" }}>
-            Visited Profile
+        <div className="disconnected-profile">
+
+            <div className='profile-pic-container'>
+                <img src="https://images.unsplash.com/photo-1584119164246-461d43e9bab3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80" alt="profile pic" />
+            </div>
+            <div className='social-media-info'>
+                <div className='user-name'>
+                    <h1>{user.name}</h1>
+                </div>
+                <div className='follow-count'>
+                    <p>{user?.followers?.length} followers</p>
+                    <p>{user?.following?.length} following</p>
+                </div>
+            </div>
             <div>
                 {/* <img src="" alt="" /> */}
-                <h1>{user.name}</h1>
-                <p>{user?.followers?.length} followers</p>
+
                 {user?._id !== currentUserId &&
                     <button onClick={onFollowChange}>
                         {follow ? 'following' : 'follow'}
                     </button>
                 }
             </div>
-            <div className='interested-in-container'>
+            <div className='saved-events-container'>
                 {user?._id === currentUserId &&
                     < FavList userId={currentUserId} />}
             </div>

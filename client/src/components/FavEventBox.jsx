@@ -1,41 +1,71 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from "../context/auth";
+import { IoMdRemoveCircle } from "react-icons/io";
+import { BiDetail } from 'react-icons/bi'
+import { IconContext } from 'react-icons';
+import './FavEventBox.css'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
-function FavEventBox(prop) {
+function FavEventBox(props) {
+    const { user: currentUser } = useContext(AuthContext)
     const storedToken = localStorage.getItem('authToken')
     const [favEvent, setFavEvent] = useState({})
+    const navigate = useNavigate()
     const fetchEvent = () => {
-        axios.get(`/api/events/${[prop.favEventId]}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+        axios.get(`/api/events/${props.favEventId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => {
                 setFavEvent(res.data)
             })
     }
 
     useEffect(() => {
+
         fetchEvent()
-    }, [prop])
+        // props.displayFavList()
+
+
+    }, [props.favEventId])
+
+    useEffect(() => {
+        props.displayFavList()
+    }, [favEvent])
+
+
 
     const handleRemoveEvent = () => {
-        axios.delete(`/api/events/${[prop.favEventId]}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-            .then()
+        axios.put(`/api/users/${props.favEventId}/remove/fav-list`, { userId: currentUser._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .then(
+                fetchEvent()
+            )
             .catch(err => console.log(err))
-        fetchEvent()
     }
+
+
+    const handleNavToEvent = () => {
+        navigate(`/events/${props.favEventId}`)
+    }
+
+    // console.log(isEditOn)
 
     return (
         <>
+
             {favEvent && (
-                <div>
-                    <span>Title:</span>
-                    <p>{favEvent && favEvent.title}</p>
-                    <span>Date:</span>
-                    <p>{favEvent && favEvent.date}</p>
-                    <span>Time:</span>
-                    <p>{favEvent && favEvent.time}</p>
-                    <span>Location:</span>
-                    <p>{favEvent && favEvent.location}</p>
-                    <button onClick={handleRemoveEvent}>remove</button>
+                <div className='details-container'>
+
+                    {props?.isEditOn ?
+                        <IconContext.Provider value={{ color: 'rgba(0, 0, 0, 0.671)', size: '22px' }} >
+                            <IoMdRemoveCircle className='remove-icon' onClick={handleRemoveEvent} />
+                        </IconContext.Provider>
+                        : <IconContext.Provider value={{ color: 'rgba(0, 0, 0, 0.6)', size: '22px' }} >
+                            <BiDetail className='view-details-icon' onClick={handleNavToEvent} />
+                        </IconContext.Provider>}
+                    <p>Event: {favEvent && favEvent.title}</p>
+                    <p>Date: {favEvent && favEvent.date}</p>
+                    <p>Time: {favEvent && favEvent.time}</p>
+                    <p>Location: {favEvent && favEvent.location}</p>
                 </div>
             )}
         </>

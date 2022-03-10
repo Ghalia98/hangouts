@@ -1,0 +1,22 @@
+.remove-icon {
+    position: absolute;
+    right: 38px;
+
+}
+
+.remove-icon:hover {
+    cursor: pointer;
+    transition: 0.65s ease;
+    transform: rotate(1turn)
+}
+
+.view-details-icon {
+    position: absolute;
+    right: 38px;
+}
+
+.view-details-icon:hover {
+    cursor: pointer;
+    transition: 0.5s ease;
+    transform: scale(1.25);
+}

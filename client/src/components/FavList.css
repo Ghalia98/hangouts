@@ -1,0 +1,16 @@
+.edit-fav-list-button {
+    position: absolute;
+    right: 25px;
+    top: 16px;
+    background-color: rgba(0, 89, 255, 0.829);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 6px 15px;
+}
+
+.edit-fav-list-button:hover {
+    background-color: rgba(4, 64, 177, 0.829);
+    cursor: pointer;
+    transition: 0.5s ease;
+}

@@ -58,7 +58,7 @@ router.put("/:id/unfollow", async (req, res) => {
 });
 
 // add event to fav-list
-router.put("/:id/update/fav-list", (req, res, next) => {
+router.put("/:id/add/fav-list", (req, res, next) => {
     const eventId = req.params.id
     const userId = req.body.userId
     User.findById(userId)
@@ -78,7 +78,7 @@ router.put("/:id/update/fav-list", (req, res, next) => {
 })
 
 // remove event from a user's fav list 
-router.delete("/:id/update/fav-list", (req, res, next) => {
+router.put("/:id/remove/fav-list", (req, res, next) => {
     const eventId = req.params.id
     const userId = req.body.userId
     User.findById(userId)

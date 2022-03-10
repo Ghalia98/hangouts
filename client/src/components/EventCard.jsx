@@ -5,6 +5,7 @@ import './event-card.css'
 import { AuthContext } from "../context/auth";
 import * as BsIcons from "react-icons/bs";
 import { IconContext } from 'react-icons';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -12,14 +13,16 @@ function EventCard({ title, _id, creator }) {
 
     // console.log(_id)
     const { user: currentUser } = useContext(AuthContext)
-    const [isFav, setIsFav] = useState('')
+    const [isFav, setIsFav] = useState(false)
     const storedToken = localStorage.getItem('authToken')
+    const navigate = useNavigate()
 
     const handleFavList = () => {
-        axios.put(`/api/users/${_id}/update/fav-list`, { userId: currentUser._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
+        axios.put(`/api/users/${_id}/add/fav-list`, { userId: currentUser._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(res => {
                 console.log(res)
-                setIsFav(true)
+                setIsFav((isFav) => !isFav)
+                navigate('/profile')
 
             })
             .catch(err => console.log(err))
@@ -32,7 +35,7 @@ function EventCard({ title, _id, creator }) {
             console.log('valueee', (currentUser.favList.includes(_id)))
             console.log(currentUser)
         }
-    }, [])
+    }, [_id, currentUser])
     // useEffect((_id) => {
     //     if (currentUser) {
     //         axios.get(`/api/users/${currentUser._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
