@@ -64,12 +64,14 @@ function Messenger() {
 
     useEffect(() => {
         const fetchMessages = async () => {
-            try {
-                const res = await axios.get(`/api/messages/${currentChat?._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-                setMessages(res.data)
-                // console.log(res)
-            } catch (err) {
-                console.log(err)
+            if (currentChat) {
+                try {
+                    const res = await axios.get(`/api/messages/${currentChat?._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+                    setMessages(res.data)
+                    // console.log(res)
+                } catch (err) {
+                    console.log(err)
+                }
             }
         }
         fetchMessages()
@@ -121,9 +123,14 @@ function Messenger() {
                 {currentChat ?
                     <>
                         <div className='message-box'>
-                            {messages.map(msg => {
-                                return <Message message={msg} key={msg._id} own={msg.sender === currentUser._id} />
-                            })}
+                            {messages && (
+                                <>
+                                    {
+                                        messages.map(msg => {
+                                            return <Message message={msg} key={msg._id} own={msg.sender === currentUser._id} />
+                                        })
+
+                                    }</>)}
                         </div>
                         {/* <div><Message /></div>
                 <div><Message own={true} /></div> */}

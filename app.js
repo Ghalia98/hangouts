@@ -27,7 +27,7 @@ const users = require("./routes/users");
 app.use("/api/users", isAuthenticated, users);
 
 const conversations = require("./routes/conversations");
-app.use("/api/conversations", isAuthenticated, conversations);
+app.use("/api/conversations", conversations);
 
 const messages = require("./routes/messages");
 app.use("/api/messages", isAuthenticated, messages);
