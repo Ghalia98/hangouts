@@ -5,6 +5,8 @@
 
 .message-box {
     width: 250px;
+    height: 400px;
+    background-color: whitesmoke;
 }
 
 .row-container {
@@ -15,7 +17,7 @@
 .messenger-container {
     display: flex;
     flex-direction: column;
-    max-height: 400px;
+    height: 400px;
 }
 
 .message-box {

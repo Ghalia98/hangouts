@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import './event-card.css'
+import './EventCard.css'
 import { AuthContext } from "../context/auth";
 import * as BsIcons from "react-icons/bs";
 import { IconContext } from 'react-icons';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function EventCard({ title, _id, creator }) {
+function EventCard({ title, _id, creator, guestList }) {
 
     // console.log(_id)
     const { user: currentUser } = useContext(AuthContext)
@@ -48,22 +48,24 @@ function EventCard({ title, _id, creator }) {
     return (
         <>
             <>
-                <Link to={`/events/${_id}`}>
-                    <h1>{title}</h1>
-                </Link>
-                <Link to={`/${creator && creator._id}/Profile`}>
-                    <h3>Created by:<span className="creator">{creator && creator.name}</span></h3>
-                </Link>
-                <br /> <br />
+                <>
+                    <Link to={`/events/${_id}`}>
+                        <h1>{title}</h1>
+                    </Link>
+                    <Link to={`/${creator && creator._id}/Profile`}>
+                        <h3>Created by:<span className="creator">{creator && creator.name}</span></h3>
+                    </Link>
+                    <br /> <br />
+
+                </>
+                <div className='fav-icon'>
+                    <IconContext.Provider value={{ color: '#a83f39', size: '20px' }}>
+                        {isFav ? < BsIcons.BsSuitHeartFill onClick={handleFavList} /> : < BsIcons.BsSuitHeart onClick={handleFavList} />}
+                    </IconContext.Provider>
+                </div>
 
             </>
-            <div className='fav-icon'>
-                <IconContext.Provider value={{ color: '#a83f39', size: '20px' }}>
-                    {isFav ? < BsIcons.BsSuitHeartFill onClick={handleFavList} /> : < BsIcons.BsSuitHeart onClick={handleFavList} />}
-                </IconContext.Provider>
-            </div>
         </>
-
     )
 
 }

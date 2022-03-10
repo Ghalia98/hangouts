@@ -6,7 +6,8 @@ function Conversation({ conversation, currentUser }) {
     const storedToken = localStorage.getItem('authToken')
     useEffect(() => {
         if (conversation) {
-            const friendId = conversation.members.find(memberId => memberId !== currentUser._id)
+            const friendId = conversation.members.find(memberId => memberId !== currentUser?._id)
+            // console.log(friendId)
             const fetchUser = async () => {
                 try {
                     const res = await axios.get(`/api/users/${friendId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -21,7 +22,7 @@ function Conversation({ conversation, currentUser }) {
     }, [currentUser, conversation])
 
 
-
+    // console.log(user)
 
     return (
         <div className='convo'>

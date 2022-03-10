@@ -6,7 +6,7 @@ import * as CgIcons from "react-icons/cg"
 import * as MdIcons from "react-icons/md"
 import * as FiIcons from "react-icons/fi"
 import * as HiIcons from "react-icons/hi"
-import './navbar.css'
+import './Navbar.css'
 import { IconContext } from 'react-icons';
 import { useContext } from "react";
 import { AuthContext } from "../context/auth";
