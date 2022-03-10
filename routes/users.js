@@ -6,7 +6,7 @@ const User = require('../models/User')
 
 router.get('/:id', (req, res, next) => {
     const { id } = req.params
-    User.findById(id, { following: 1, followers: 1, _id: 1, name: 1, favList: 1 })
+    User.findById(id, { following: 1, followers: 1, _id: 1, name: 1, favList: 1, location: 1, age: 1, gender: 1, bio: 1, job: 1 })
         .then(user => {
             res.status(200).json(user)
         }

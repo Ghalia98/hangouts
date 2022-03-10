@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from "../context/auth";
 import FavList from '../components/FavList';
 import './visited-profile.css';
-import './disconnected-profile.css'
-
+import './disconnected-profile.css';
+import './Profile.css'
 
 
 function VisitedProfile() {
@@ -13,22 +13,13 @@ function VisitedProfile() {
     const { id } = useParams()
     const [user, setUser] = useState({})
     const [followers, setFollowers] = useState('Loading')
+    // const [following, setFollowing] = useState('Loading')
     const storedToken = localStorage.getItem('authToken')
 
     useEffect(() => {
         fetchUser()
 
     }, [followers])
-
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setFollowers(user.followers?.length)
-
-    //     }, 3000)
-
-    // }, [])
-
 
     const fetchUser = () => {
         axios.get(`/api/users/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -39,6 +30,15 @@ function VisitedProfile() {
                 setFollowers(res.data.followers.length)
             })
             .catch(err => console.log(err))
+
+        // axios.get(`/api/users/${currentUser._id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+        //     .then(res => {
+        //         setUser(res.data)
+        //         console.log(res)
+        //         setFollow(res.data.followers === undefined ? false : res.data.followers.includes(currentUser?._id))
+        //         setFollowing(res.data.following.length)
+        //     })
+        //     .catch(err => console.log(err))
     }
 
     // console.log(user)
@@ -59,6 +59,7 @@ function VisitedProfile() {
             axios.put(`/api/users/${id}/unfollow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers - 1)
+                    // setFollowing(res.data.following + 1)
                     console.log(res)
                 })
                 .catch(err => console.log(err))
@@ -66,6 +67,7 @@ function VisitedProfile() {
             axios.put(`/api/users/${id}/follow`, { userId: currentUser?._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(res => {
                     setFollowers(res.data.followers + 1)
+                    // setFollowing(res.data.following - 1)
                     console.log(res)
                 }
                 )
@@ -104,28 +106,28 @@ export function DisconnectedProfile({ user, currentUserId, onFollowChange, follo
                 {/* <img src="" alt="" /> */}
 
                 {user?._id !== currentUserId &&
-                    <button onClick={onFollowChange}>
-                        {follow ? 'following' : 'follow'}
-                    </button>
+                    <>
+                        <button onClick={onFollowChange} className={follow ? 'follow-btn following' : 'follow-btn follow'}>
+                            {follow ? 'following' : 'follow'}
+                        </button>
+                        <div className='user-info-container'>
+                            <div className='details-container'>
+                                <p>Bio: {user?.bio}</p>
+                                <p>Age: {user?.age}</p>
+                                <p>Gender: {user?.gender}</p>
+                                <p>Location: {user?.location}</p>
+                                <p>Job: {user?.job}</p>
+                            </div>
+                        </div>
+                    </>
+
                 }
             </div>
-            <div className='saved-events-container'>
-                {user?._id === currentUserId &&
-                    < FavList userId={currentUserId} />}
-            </div>
-            <div className='my-events-container'>
-
-            </div>
-            <div className='invitations-container'>
-
-            </div>
-            <div className='followers-list-container'>
-
-            </div>
-            <div className='following-list-container'>
-
-            </div>
-
+            {user?._id === currentUserId &&
+                <div className='saved-events-container'>
+                    < FavList userId={currentUserId} />
+                </div>
+            }
         </div>
     )
 }
