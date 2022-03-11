@@ -58,11 +58,11 @@ function EventDetails() {
                                     <button className='edit btn'>Edit</button>
                                 </Link>
                                 < EventDeleteBtn eventId={id} />
-                                <GoingBtn handleGoingList={handleGoingList} />
                             </>
 
                         }
 
+                        <GoingBtn handleGoingList={handleGoingList} />
 
                     </div>
                 </div>
