@@ -12,12 +12,28 @@
 
 .popup-inner {
     position: relative;
-    padding: 32px;
-    width: 100%;
+    /* padding: 32px; */
+    height: 600px;
+    width: 80%;
     max-width: 640px;
-    background-color: rgba(255, 255, 255, 0.787);
+    background-color: rgba(255, 255, 255, 0.931);
     border-radius: 1rem;
-    border: 1.2px solid #6673fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.popup-inner input {
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid #060b26;
+    color: #060b26;
 }
 
 .popup-inner .close-btn {

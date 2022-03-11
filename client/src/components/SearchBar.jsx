@@ -6,8 +6,8 @@ function SearchBar(props) {
 
     }
     return (
-        <div>
-            <input type="text" id="title" placeholder='Search' onChange={searchHandler} value={props.search} style={{ width: '300px', height: '30px', backgroundColor: 'rgb(255,255,255, 0.2)', color: 'black' }} />
+        <div id='search-bar'>
+            <input type="text" id="title" placeholder='Search' onChange={searchHandler} value={props.search} />
         </div>
     )
 }

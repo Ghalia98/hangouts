@@ -7,14 +7,14 @@
 }
 
 .message.own .message-text {
-    background-color: aquamarine;
+    background-color: rgba(83, 185, 185, 0.61);
     border-radius: 20px;
     padding: 10px;
     max-width: 150px;
 }
 
 .message .message-text {
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.541);
     border-radius: 20px;
     padding: 10px;
     max-width: 150px;

@@ -13,7 +13,6 @@ import VisitedProfile from './pages/VisitedProfile';
 import { useEffect } from 'react';
 import alanBtn from '@alan-ai/alan-sdk-web'
 import { useNavigate } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 const alanKey = '41effc0282974b90e440026551d25c8d2e956eca572e1d8b807a3e2338fdd0dc/stage'
 function App() {
   const navigate = useNavigate()
@@ -21,19 +20,17 @@ function App() {
     alanBtn({
       key: alanKey,
       onCommand: ({ command, route }) => {
-        if (command === 'testCommand') {
-          alert('This code was executed')
-        }
+        // if (command === 'testCommand') {
+        //   alert('This code was executed')
+        // }
         if (command === "navigation to profile") {
           //call client code that will react on the received command
           // alert('This code was executed')
-          // window.open("profile", "_self")
           navigate(`/profile`)
         }
         if (command === "navigation to home") {
           //call client code that will react on the received command
           // alert('This code was executed')
-          // window.open("profile", "_self")
           navigate(`/`)
         }
       }
@@ -42,7 +39,7 @@ function App() {
 
   const [backgroundImg, setBackgroundImg] = useState('')
   const renderBgImg = () => {
-    fetch(`https://api.unsplash.com/photos/random/?client_id=44tBzWk4AZOOkixpuhybYGVl2yF1dIlzkLnwGEmZ6mA`)
+    fetch(`https://api.unsplash.com/photos/random/?query=landscape&query=nature&query=dark-background&client_id=44tBzWk4AZOOkixpuhybYGVl2yF1dIlzkLnwGEmZ6mA`)
       .then(function (response) {
         return response.json()
       })

@@ -49,20 +49,32 @@ function EventCard({ title, _id, creator, guestList }) {
         <>
             <>
                 <>
-                    <Link to={`/events/${_id}`}>
-                        <h1>{title}</h1>
-                    </Link>
-                    <Link to={`/${creator && creator._id}/Profile`}>
-                        <h3>Created by:<span className="creator">{creator && creator.name}</span></h3>
-                    </Link>
-                    <br /> <br />
+                    <div class="card">
 
+                        <Link to={`/events/${_id}`}>
+                            <h3 class="title">{title}</h3>
+
+
+                            <div class="bar">
+                                <div class="emptybar"></div>
+                                <div class="filledbar"></div>
+                            </div>
+                            <div class="circle">
+                                <Link to={`/${creator && creator._id}/Profile`}>
+                                    <h3>Created by:<span className="creator">{creator && creator.name}</span></h3>
+                                </Link>
+
+                            </div>
+                        </Link>
+
+                        <div className='fav-icon'>
+                            <IconContext.Provider value={{ color: '#a83f39', size: '20px' }}>
+                                < BsIcons.BsSuitHeart onClick={handleFavList} />
+                            </IconContext.Provider>
+                        </div>
+                    </div>
                 </>
-                <div className='fav-icon'>
-                    <IconContext.Provider value={{ color: '#a83f39', size: '20px' }}>
-                        {isFav ? < BsIcons.BsSuitHeartFill onClick={handleFavList} /> : < BsIcons.BsSuitHeart onClick={handleFavList} />}
-                    </IconContext.Provider>
-                </div>
+
 
             </>
         </>

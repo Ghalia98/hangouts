@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 53%;
+    width: 45%;
     margin: auto;
 
 }
@@ -11,26 +11,128 @@
 .section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    /* align-items: center; */
     margin: auto;
     width: 100%;
-    height: 400px;
-    background-color: rgba(221, 224, 226, 0.972);
+    height: 450px;
+    background-color: hsla(0, 0%, 100%, 0.924);
 
 }
+
 
 .section.one {
-    width: 100%;
-    border-bottom-left-radius: 40px;
+    width: 60%;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+
 
 }
 
 
-.section.two {
-    width: 100%;
-    background-color: rgba(245, 245, 245, 0.972);
-    border-top-right-radius: 40px;
-    border-left: 1px solid rgb(199, 197, 197);
 
+.event-details .section h3 {
+    color: rgba(0, 0, 0, 0.671), ;
+    padding-left: 20%;
+    /* width: 1000px */
+}
+
+.event-details .section p {
+    color: rgba(0, 0, 0, 0.671);
+    text-align: left;
+    padding-left: 20%
+}
+
+.event-details .section li {
+    color: rgba(0, 0, 0, 0.671);
+    padding-top: 5px;
+    text-align: center;
+    list-style: none
+}
+
+.section.two {
+    width: 60%;
+    background-color: rgba(240, 244, 250, 0.924);
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    border-left: 1px solid rgb(199, 197, 197);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+
+}
+
+.btn {
+
+    border: none;
+    border-radius: 5px;
+    padding: 6px 15px;
+    box-sizing: border-box;
+}
+
+.delete {
+    border: 1px solid rgb(255, 85, 85);
+    background-color: transparent;
+    color: rgb(255, 85, 85)
+}
+
+.edit {
+    border: 1px solid rgba(43, 116, 250, 0.829);
+    background-color: transparent;
+    color: rgba(43, 116, 250, 0.829)
+}
+
+.going {
+    border: 1px solid rgb(148, 147, 147);
+    background-color: transparent;
+    color: rgb(148, 147, 147);
+}
+
+.edit.btn:hover {
+    background-color: rgba(43, 116, 250, 0.829);
+    cursor: pointer;
+    transition: 0.5s ease;
+    color: white;
+}
+
+.delete.btn:hover {
+    background-color: rgb(255, 85, 85);
+    cursor: pointer;
+    transition: 0.5s ease;
+    color: white;
+}
+
+.going.btn:hover {
+    background-color: rgb(148, 147, 147);
+    cursor: pointer;
+    color: white;
+    transition: 0.5s ease;
+
+}
+
+.btn-container {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-container .btn {
+    margin-left: 20px;
+}
+
+
+.section .display {
+    background-color: transparent;
+    color: rgb(148, 147, 147);
+    border: 1px solid rgb(148, 147, 147);
+
+}
+
+.section .display:hover {
+    cursor: pointer;
+    background-color: rgb(148, 147, 147);
+    color: white
 }

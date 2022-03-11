@@ -1,0 +1,21 @@
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 1rem;
+    padding: 50px;
+}
+
+
+.edit-form input {
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 30px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid #060b26;
+    color: #060b26;
+}

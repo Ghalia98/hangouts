@@ -22,7 +22,9 @@ function Messenger() {
     // console.log(currentUser)
 
     useEffect(() => {
+
         socket.current = io("https://hangout-events.herokuapp.com");
+        // socket.current = io("http://localhost:5005");
         socket.current.on("getMessage", data => {
             setReceivedMessage({
                 sender: data.senderId,
@@ -31,6 +33,9 @@ function Messenger() {
             })
         })
 
+        return () => {
+            socket.current.close()
+        }
     }, [])
 
     useEffect(() => {
@@ -134,11 +139,9 @@ function Messenger() {
                         </div>
                         {/* <div><Message /></div>
                 <div><Message own={true} /></div> */}
-                        <div>
+                        <div className='chat-footer'>
                             <textarea className='chatInput' placeholder='send a message..' value={newMessage} onChange={(e) => setNewMessage(e.target.value)}></textarea>
                             <button className='chatSubmitBtn' onClick={handleSend}>Send</button>
-
-
                         </div>
                     </>
                     : <span>Start a hangout chat</span>}

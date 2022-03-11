@@ -16,7 +16,7 @@ function EventDeleteBtn({ eventId, eventCreator }) {
     return (
         <>
 
-            <button type='button' onClick={deleteEventHandler}>Delete</button>
+            <button type='button' onClick={deleteEventHandler} className="delete btn" >Delete</button>
 
         </>
     )

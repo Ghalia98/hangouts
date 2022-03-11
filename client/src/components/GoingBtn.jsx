@@ -9,7 +9,7 @@ function GoingBtn(prop) {
     return (
         <>
             {/* <IoIcons.IoAddOutline /> */}
-            <button onClick={prop.handleGoingList}>Going</button>
+            <button onClick={prop.handleGoingList} className="going btn">Going</button>
         </>
     )
 }

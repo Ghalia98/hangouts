@@ -26,7 +26,7 @@ function Conversation({ conversation, currentUser }) {
     return (
         <div className='convo'>
             {user &&
-                <h1 className='conv-name'>{user.name}</h1>
+                <h3 className='conv-name'>{user.name}</h3>
             }
         </div>
     )

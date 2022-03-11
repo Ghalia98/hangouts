@@ -45,43 +45,48 @@ export default function Signup() {
             <div className="signup-form">
                 <form onSubmit={handleSubmit} >
                     <h1>Signup</h1>
-                    <div>
-                        <label htmlFor="email">Email: </label>
-                        <input type="text" value={email} onChange={handleEmail} />
+                    <div className='row'>
+                        <div >
+                            <div>
+                                <label htmlFor="email">Email: </label>
+                                <input type="text" value={email} onChange={handleEmail} />
+                            </div>
+                            <div>
+                                <label htmlFor="password">Password: </label>
+                                <input type="password" value={password} onChange={handlePassword} />
+                            </div>
+                            <div>
+                                <label htmlFor="name">Full Name: </label>
+                                <input type="text" value={name} onChange={handleName} id="name" />
+                            </div>
+                            <div>
+                                <label htmlFor="age">Age: </label>
+                                <input type="number" min='10' value={age} onChange={handleAge} id="age" />
+                            </div>
+                            <div>
+                                <label htmlFor="gender">Gender: </label>
+                                <select type="string" value={gender} onChange={handleGender} id="gender">
+                                    <option value="option">Gender</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label htmlFor="location">Location: </label>
+                                <input type="text" value={location} onChange={handleLocation} />
+                            </div>
+                            <div>
+                                <label htmlFor="job">Job: </label>
+                                <input type="text" value={job} onChange={handleJob} />
+                            </div>
+                            <div>
+                                <label htmlFor="bio">Bio: </label>
+                                <textarea type="text" value={bio} onChange={handleBio} />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor="password">Password: </label>
-                        <input type="password" value={password} onChange={handlePassword} />
-                    </div>
-                    <div>
-                        <label htmlFor="name">Full Name: </label>
-                        <input type="text" value={name} onChange={handleName} id="name" />
-                    </div>
-                    <div>
-                        <label htmlFor="age">Age: </label>
-                        <input type="number" min='10' value={age} onChange={handleAge} id="age" />
-                    </div>
-                    <div>
-                        <label htmlFor="gender">Gender: </label>
-                        <select type="string" value={gender} onChange={handleGender} id="gender">
-                            <option value="option">Gender</option>
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="location">Location: </label>
-                        <input type="text" value={location} onChange={handleLocation} />
-                    </div>
-                    <div>
-                        <label htmlFor="job">Job: </label>
-                        <input type="text" value={job} onChange={handleJob} />
-                    </div>
-                    <div>
-                        <label htmlFor="bio">Bio: </label>
-                        <textarea type="text" value={bio} onChange={handleBio} />
-                    </div>
-
                     <div className='signup-btn-container'>
                         <button type="submit">Sign Up</button>
                     </div>

@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './EventEdit.css'
 
 
 function EventEdit() {
@@ -52,7 +53,7 @@ function EventEdit() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="edit-form">
                 <div>
                     <label htmlFor="title">Title: </label>
                     <input type="text" id="title" onChange={(e) => setTitle(e.target.value)} value={title} />

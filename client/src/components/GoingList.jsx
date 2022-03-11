@@ -5,7 +5,7 @@ function GoingList(prop) {
 
     return (
         <div>
-            <h3>Going List</h3>
+            <h3>Going </h3>
             {prop.event === null ? 'Loading' :
                 <>
                     {prop.event.goingList.map((guest, index) => {

@@ -1,26 +1,83 @@
 .messenger-container {
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(163, 160, 160, 0.13);
+}
+
+.row-container input {
+    background-color: rgb(46, 45, 44);
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.575);
+
 }
 
 .message-box {
     width: 250px;
     height: 400px;
-    background-color: whitesmoke;
+    background-color: rgba(255, 247, 247, 0.794);
 }
 
 .row-container {
     display: flex;
     flex-direction: row;
+    background-color: rgb(46, 45, 44);
+}
+
+.row-container h3 {
+    color: antiquewhite;
+    font-weight: 400;
+    padding-left: 10px;
 }
 
 .messenger-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 400px;
+    background-color: transparent;
+}
+
+.messenger-container span {
+    color: antiquewhite;
+    font-weight: 400;
+    text-align: center;
+    padding-right: 20px;
+
+
 }
 
 .message-box {
     height: 100%;
     overflow-y: scroll;
+}
+
+.chat-footer {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-footer textarea {
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.863);
+    border: 3px solid rgba(255, 255, 255, 0.171);
+    border-bottom-left-radius: 5px;
+}
+
+.chat-footer button {
+    width: 20%;
+    background-color: rgb(83, 185, 185);
+    ;
+    border: none;
+    border-bottom-right-radius: 5px;
+    color: white;
+
+}
+
+
+.chat-footer button:hover {
+    cursor: pointer;
+    background-color: rgb(83, 185, 185);
+
 }

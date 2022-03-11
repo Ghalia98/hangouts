@@ -91,7 +91,7 @@ export function DisconnectedProfile({ user, currentUserId, onFollowChange, follo
         <div className="disconnected-profile">
 
             <div className='profile-pic-container'>
-                <img src="https://images.unsplash.com/photo-1584119164246-461d43e9bab3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80" alt="profile pic" />
+                <img src="https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png" alt="profile pic" />
             </div>
             <div className='social-media-info'>
                 <div className='user-name'>
