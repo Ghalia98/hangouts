@@ -32,6 +32,19 @@ router.get("/:userId", async (req, res, next) => {
     }
 })
 
+// fetch users convo (id of a convo for a two specifc users)
+router.get('/find/:firstUserId/:secondUserId', async (req, res) => {
+    try {
+        const conversation = await Conversation.findOne(
+            {
+                members: { $all: [req.params.firstUserId, req.params.secondUserId] }
+            }
+        )
+        res.status(200).json(conversation)
+    } catch (err) {
+        err => next(err)
+    }
+})
 
 
 

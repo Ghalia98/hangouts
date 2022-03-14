@@ -5,7 +5,7 @@ import Conversation from './Conversation';
 import Message from './Message';
 import './Messenger.css';
 import { io } from 'socket.io-client';
-// import OnlineFriends from './OnlineFriends'
+import OnlineFriends from './OnlineFriends'
 
 
 function Messenger() {
@@ -15,7 +15,7 @@ function Messenger() {
     const { user: currentUser } = useContext(AuthContext);
     const [newMessage, setNewMessage] = useState('')
     const [receivedMessage, setReceivedMessage] = useState(null)
-    // const [onlineUsers, setOnlineUsers] = useState([])
+    const [onlineUsers, setOnlineUsers] = useState([])
     const socket = useRef()
     const storedToken = localStorage.getItem('authToken')
 
@@ -47,10 +47,16 @@ function Messenger() {
         if (currentUser) {
             socket.current.emit("addUser", currentUser?._id);
             socket.current.on("getUsers", users => {
-                // setOnlineUsers(users);
+
+                setOnlineUsers(currentUser.following.filter(f => users.some(u => u.userId === f)));
+                console.log(users)
+
+
+                console.log(users)
             })
         }
     }, [currentUser])
+
 
     useEffect(() => {
         if (currentUser) {
@@ -147,9 +153,9 @@ function Messenger() {
                     : <span>Start a hangout chat</span>}
             </div>
 
-            {/* <div className='online-friends'>
-                <OnlineFriends onlineUsers={onlineUsers} currentId={currentUser._id} currentChat={setCurrentChat} />
-            </div> */}
+            <div className='online-friends'>
+                <OnlineFriends onlineUsers={onlineUsers} currentId={currentUser._id} setCurrentChat={setCurrentChat} />
+            </div>
         </div>
     )
 }
